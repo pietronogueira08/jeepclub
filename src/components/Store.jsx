@@ -40,9 +40,9 @@ export default function Store() {
   return (
     <section
       id="loja"
-      className="relative bg-brand-surface py-24 lg:py-32 overflow-hidden"
+      className="relative bg-brand-surface py-20 sm:py-24 lg:py-32 overflow-hidden"
     >
-      {/* Background texture */}
+      {/* Border accents */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
         style={{ background: 'linear-gradient(to right, transparent, rgba(232,118,10,0.4), transparent)' }}
@@ -54,7 +54,7 @@ export default function Store() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mb-14">
+        <div className="mb-10 sm:mb-14">
           <motion.div
             className="section-label mb-3"
             initial={{ opacity: 0, x: -20 }}
@@ -68,11 +68,11 @@ export default function Store() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="flex flex-col sm:flex-row sm:items-end gap-4 justify-between"
+            className="flex flex-col sm:flex-row sm:items-end gap-3 justify-between"
           >
             <h2
               className="font-display text-brand-text leading-none"
-              style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}
+              style={{ fontSize: 'clamp(2.2rem, 7vw, 4.5rem)' }}
             >
               MERCH DO
               <span className="text-brand-primary"> CLUBE</span>
@@ -84,19 +84,19 @@ export default function Store() {
         </div>
 
         {/* Products */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {PRODUCTS.map((product, i) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.12, duration: 0.6 }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ y: -6 }}
               className="group bg-brand-bg border border-white/5 hover:border-brand-primary/30 rounded-xl overflow-hidden transition-all duration-300 flex flex-col"
             >
               {/* Product image */}
-              <div className="relative h-60 overflow-hidden">
+              <div className="relative h-56 sm:h-60 overflow-hidden">
                 <img
                   src={product.image}
                   alt={product.name}
@@ -105,12 +105,10 @@ export default function Store() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent" />
 
-                {/* Tag */}
                 <span className={`absolute top-3 left-3 px-2.5 py-1 rounded text-xs font-mono tracking-wider ${product.tagColor}`}>
                   {product.tag}
                 </span>
 
-                {/* Shopping icon on hover */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="w-12 h-12 rounded-full bg-brand-primary/90 flex items-center justify-center">
                     <ShoppingBag size={20} className="text-white" />
@@ -118,8 +116,7 @@ export default function Store() {
                 </div>
               </div>
 
-              <div className="p-5 flex flex-col gap-3 flex-1">
-                {/* Name & Price */}
+              <div className="p-4 sm:p-5 flex flex-col gap-3 flex-1">
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-display text-brand-text text-lg leading-tight group-hover:text-brand-primary transition-colors">
                     {product.name}
@@ -133,15 +130,14 @@ export default function Store() {
                   {product.desc}
                 </p>
 
-                {/* Separator */}
                 <div className="tire-divider my-1" />
 
-                {/* WhatsApp CTA */}
+                {/* WhatsApp CTA — large touch target */}
                 <a
                   href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(product.whatsappMsg)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full py-3 bg-[#25D366] hover:bg-[#1da851] text-white font-body font-semibold text-sm rounded-lg transition-all duration-200 shadow-lg shadow-green-900/20"
+                  className="flex items-center justify-center gap-2 w-full py-3.5 bg-[#25D366] hover:bg-[#1da851] active:bg-[#1da851] text-white font-body font-semibold text-sm rounded-lg transition-all duration-200 shadow-lg shadow-green-900/20 touch-manipulation"
                 >
                   <MessageCircle size={16} />
                   PEDIR VIA WHATSAPP
@@ -157,11 +153,11 @@ export default function Store() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4 }}
-          className="mt-10 flex flex-wrap gap-6 justify-center text-brand-muted text-sm font-body"
+          className="mt-8 sm:mt-10 flex flex-wrap gap-4 sm:gap-6 justify-center text-brand-muted text-xs sm:text-sm font-body"
         >
           {['Entrega em toda a região', 'Retirada na sede do clube', 'Pagamento via PIX ou dinheiro'].map((info) => (
             <div key={info} className="flex items-center gap-2">
-              <Tag size={13} className="text-brand-primary" />
+              <Tag size={12} className="text-brand-primary" />
               {info}
             </div>
           ))}

@@ -5,7 +5,6 @@ import { ChevronDown } from 'lucide-react'
 export default function Hero() {
   const canvasRef = useRef(null)
 
-  // Animated particle field for terrain texture
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -20,8 +19,7 @@ export default function Hero() {
     resize()
     window.addEventListener('resize', resize)
 
-    // Create particles
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 40; i++) {
       particles.push({
         x:     Math.random() * canvas.width,
         y:     Math.random() * canvas.height,
@@ -64,13 +62,13 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden noise-overlay"
     >
       {/* Background Layers */}
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/hero-bg.jpeg')" }}
       />
       <div className="absolute inset-0 bg-brand-bg/70" />
 
-      {/* Radial orange glow from center */}
+      {/* Radial orange glow */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -78,9 +76,9 @@ export default function Hero() {
         }}
       />
 
-      {/* Diagonal grid lines — terrain texture */}
+      {/* Grid lines — hidden on very small screens to reduce noise */}
       <div
-        className="absolute inset-0 opacity-5 pointer-events-none"
+        className="absolute inset-0 opacity-5 pointer-events-none hidden sm:block"
         style={{
           backgroundImage: `
             repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(232,118,10,0.5) 40px),
@@ -96,7 +94,7 @@ export default function Hero() {
         style={{ zIndex: 1 }}
       />
 
-      {/* Bottom diagonal cut */}
+      {/* Bottom fade */}
       <div
         className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
         style={{
@@ -106,38 +104,35 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-5xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center text-center px-5 sm:px-6 max-w-5xl mx-auto w-full">
 
         {/* Logo */}
         <motion.div
           initial={{ scale: 0.6, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
-          {/* Logo text */}
-          <div>
-            <motion.div
-              className="font-display text-center"
-              style={{ filter: 'drop-shadow(0 0 40px rgba(232,118,10,0.5))' }}
+          <motion.div
+            className="font-display text-center"
+            style={{ filter: 'drop-shadow(0 0 40px rgba(232,118,10,0.5))' }}
+          >
+            <div
+              className="text-brand-primary"
+              style={{ fontSize: 'clamp(3.2rem, 18vw, 9rem)', lineHeight: 1 }}
             >
-              <div
-                className="text-brand-primary"
-                style={{ fontSize: 'clamp(3.5rem, 12vw, 9rem)', lineHeight: 1 }}
-              >
-                JEEP
-              </div>
-              <div
-                className="text-brand-text"
-                style={{ fontSize: 'clamp(2rem, 7vw, 6rem)', lineHeight: 1 }}
-              >
-                CLUBE
-              </div>
-              <div className="font-mono text-brand-muted text-xs sm:text-sm tracking-[0.3em] mt-2">
-                SÃO JOÃO DA BARRA – RJ
-              </div>
-            </motion.div>
-          </div>
+              JEEP
+            </div>
+            <div
+              className="text-brand-text"
+              style={{ fontSize: 'clamp(1.8rem, 10vw, 6rem)', lineHeight: 1 }}
+            >
+              CLUBE
+            </div>
+            <div className="font-mono text-brand-muted text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] mt-2 px-2">
+              SÃO JOÃO DA BARRA – RJ
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Tagline */}
@@ -145,17 +140,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7 }}
-          className="mb-4"
+          className="mb-4 w-full"
         >
-          <div className="tire-divider w-48 mx-auto mb-6 opacity-50" />
+          <div className="tire-divider w-32 sm:w-48 mx-auto mb-4 sm:mb-6 opacity-50" />
           <p
             className="font-display text-brand-text tracking-widest"
-            style={{ fontSize: 'clamp(1.2rem, 4vw, 2.2rem)' }}
+            style={{ fontSize: 'clamp(1rem, 4.5vw, 2.2rem)' }}
           >
             Lama, adrenalina e{' '}
             <span className="text-brand-primary glow-orange-text">irmandade.</span>
           </p>
-          <div className="tire-divider w-48 mx-auto mt-6 opacity-50" />
+          <div className="tire-divider w-32 sm:w-48 mx-auto mt-4 sm:mt-6 opacity-50" />
         </motion.div>
 
         {/* Subtitle */}
@@ -163,9 +158,9 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.6 }}
-          className="font-body text-brand-muted text-sm sm:text-base tracking-wider mb-10 max-w-md"
+          className="font-body text-brand-muted text-sm tracking-wider mb-8 sm:mb-10 max-w-xs sm:max-w-md px-2"
         >
-          Comunidade off-road da região norte fluminense — São João da Barra, RJ
+          Comunidade off-road da região norte fluminense
         </motion.p>
 
         {/* CTAs */}
@@ -173,13 +168,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9, duration: 0.6 }}
-          className="flex flex-col sm:flex-row gap-4 items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center w-full max-w-sm sm:max-w-none"
         >
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: '0 0 32px rgba(232,118,10,0.6)' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollToSection('membros')}
-            className="px-8 py-4 bg-brand-primary hover:bg-brand-accent text-white font-display tracking-[0.15em] text-lg rounded-md transition-colors duration-200 glow-orange min-w-[220px]"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-brand-primary hover:bg-brand-accent text-white font-display tracking-[0.15em] text-base sm:text-lg rounded-md transition-colors duration-200 glow-orange"
           >
             QUERO PARTICIPAR
           </motion.button>
@@ -188,7 +183,7 @@ export default function Hero() {
             whileHover={{ scale: 1.05, borderColor: '#F5A623' }}
             whileTap={{ scale: 0.97 }}
             onClick={() => scrollToSection('eventos')}
-            className="px-8 py-4 bg-transparent border-2 border-brand-primary text-brand-primary hover:text-brand-accent font-display tracking-[0.15em] text-lg rounded-md transition-all duration-200 min-w-[220px]"
+            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-transparent border-2 border-brand-primary text-brand-primary hover:text-brand-accent font-display tracking-[0.15em] text-base sm:text-lg rounded-md transition-all duration-200"
           >
             PRÓXIMAS TRILHAS
           </motion.button>
@@ -201,7 +196,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.3 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-brand-muted hover:text-brand-primary transition-colors group"
+        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-brand-muted hover:text-brand-primary transition-colors group"
       >
         <span className="font-mono text-xs tracking-widest">SCROLL</span>
         <motion.div

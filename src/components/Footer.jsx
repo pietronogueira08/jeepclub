@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { MapPin, Heart } from 'lucide-react'
 
-/* ─── Inline Social Icons (lucide-react doesn't ship brand icons) ── */
 function InstagramIcon({ size = 16, className = '' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -44,9 +43,9 @@ const NAV_COLS = [
   {
     title: 'Contato',
     links: [
-      { label: 'WhatsApp: (22) 9XXXX-XXXX', href: 'https://wa.me/5522990000000' },
-      { label: 'Email: contato@jeepclubesjb.com', href: 'mailto:contato@jeepclubesjb.com' },
-      { label: 'São João da Barra – RJ', href: '#' },
+      { label: 'WhatsApp: (22) 9XXXX-XXXX',       href: 'https://wa.me/5522990000000' },
+      { label: 'contato@jeepclubesjb.com',          href: 'mailto:contato@jeepclubesjb.com' },
+      { label: 'São João da Barra – RJ',            href: '#' },
     ],
   },
 ]
@@ -55,15 +54,6 @@ const SOCIALS = [
   { icon: InstagramIcon, href: 'https://instagram.com/jeepclube_sjb', label: 'Instagram' },
   { icon: FacebookIcon,  href: 'https://facebook.com/jeepclubesjb',   label: 'Facebook'  },
   { icon: YoutubeIcon,   href: 'https://youtube.com/@jeepclubesjb',    label: 'YouTube'   },
-]
-
-const INSTAGRAM_POSTS = [
-  'https://images.unsplash.com/photo-1565343782534-2d3a3ef1e37f?w=200&q=70',
-  'https://images.unsplash.com/photo-1601024445121-e5b82f020549?w=200&q=70',
-  'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=200&q=70',
-  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=70',
-  'https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=200&q=70',
-  'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=200&q=70',
 ]
 
 export default function Footer() {
@@ -77,80 +67,31 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-brand-surface border-t border-white/5 overflow-hidden">
-      {/* Top tire divider */}
       <div className="tire-divider opacity-20" />
 
-      {/* Instagram Feed strip */}
-      <div className="border-b border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center gap-3 mb-5">
-            <InstagramIcon size={16} className="text-brand-primary" />
-            <span className="font-mono text-brand-muted text-xs tracking-widest">@JEEPCLUBE_SJB NO INSTAGRAM</span>
-          </div>
-          <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-            {INSTAGRAM_POSTS.map((src, i) => (
-              <motion.a
-                key={i}
-                href="https://instagram.com/jeepclube_sjb"
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.06 }}
-                whileHover={{ scale: 1.05 }}
-                className="aspect-square rounded-lg overflow-hidden group relative"
-              >
-                <img
-                  src={src}
-                  alt={`Instagram post ${i + 1}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-brand-primary/0 group-hover:bg-brand-primary/30 transition-colors duration-300 flex items-center justify-center">
-                  <InstagramIcon size={18} className="text-white opacity-0 group-hover:opacity-100 transition-opacity" />
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Main Footer */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
 
           {/* Brand column */}
-          <div className="lg:col-span-2">
-            {/* Logo */}
-            <div className="mb-5">
-              <img
-                src="/logo.png"
-                alt="Jeep Clube São João da Barra"
-                className="logo-blend h-20 w-auto object-contain"
-                onError={(e) => {
-                  e.target.style.display = 'none'
-                  e.target.nextSibling.style.display = 'block'
-                }}
-              />
-              <div style={{ display: 'none' }}>
-                <div className="font-display text-brand-text text-2xl tracking-widest">JEEP CLUBE</div>
-                <div className="font-mono text-brand-primary text-xs tracking-wider">SÃO JOÃO DA BARRA – RJ</div>
-              </div>
+          <div className="sm:col-span-2 lg:col-span-2">
+            {/* Logo text */}
+            <div className="mb-4 sm:mb-5">
+              <div className="font-display text-brand-text text-2xl tracking-widest">JEEP CLUBE</div>
+              <div className="font-mono text-brand-primary text-xs tracking-wider">SÃO JOÃO DA BARRA – RJ</div>
             </div>
 
-            <p className="font-body text-brand-muted text-sm leading-relaxed max-w-sm mb-6">
+            <p className="font-body text-brand-muted text-sm leading-relaxed max-w-sm mb-5 sm:mb-6">
               Comunidade off-road apaixonada pelas estradas de terra do extremo norte fluminense.
-              Unidos pela lama, adrenalina e irmandade desde 2018.
+              Unidos pela lama, adrenalina e irmandade desde 2005.
             </p>
 
-            {/* Location */}
-            <div className="flex items-center gap-2 text-brand-muted text-sm mb-6">
+            <div className="flex items-center gap-2 text-brand-muted text-sm mb-5 sm:mb-6">
               <MapPin size={14} className="text-brand-primary flex-shrink-0" />
               <span className="font-body">São João da Barra – RJ, Brasil</span>
             </div>
 
-            {/* Socials */}
+            {/* Socials — larger touch targets */}
             <div className="flex gap-3">
               {SOCIALS.map(({ icon: Icon, href, label }) => (
                 <motion.a
@@ -160,7 +101,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   aria-label={label}
                   whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-9 h-9 rounded-lg bg-white/5 hover:bg-brand-primary/20 border border-white/5 hover:border-brand-primary/30 flex items-center justify-center text-brand-muted hover:text-brand-primary transition-all duration-200"
+                  className="w-10 h-10 rounded-lg bg-white/5 hover:bg-brand-primary/20 border border-white/5 hover:border-brand-primary/30 flex items-center justify-center text-brand-muted hover:text-brand-primary transition-all duration-200 touch-manipulation"
                 >
                   <Icon size={16} />
                 </motion.a>
@@ -171,13 +112,13 @@ export default function Footer() {
           {/* Nav cols */}
           {NAV_COLS.map((col) => (
             <div key={col.title}>
-              <h4 className="font-display text-brand-text text-sm tracking-widest mb-5">{col.title.toUpperCase()}</h4>
-              <ul className="space-y-3">
+              <h4 className="font-display text-brand-text text-sm tracking-widest mb-4 sm:mb-5">{col.title.toUpperCase()}</h4>
+              <ul className="space-y-2.5 sm:space-y-3">
                 {col.links.map((link) => (
                   <li key={link.label}>
                     <button
                       onClick={() => scrollTo(link.href)}
-                      className="font-body text-brand-muted hover:text-brand-primary text-sm transition-colors duration-200 text-left leading-snug"
+                      className="font-body text-brand-muted hover:text-brand-primary text-sm transition-colors duration-200 text-left leading-snug w-full touch-manipulation"
                     >
                       {link.label}
                     </button>
@@ -191,9 +132,9 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="font-mono text-brand-muted text-xs text-center">
-            © {new Date().getFullYear()} Jeep Clube São João da Barra – RJ. Todos os direitos reservados.
+            © {new Date().getFullYear()} Jeep Clube São João da Barra – RJ.
           </p>
           <p className="font-mono text-brand-muted text-xs flex items-center gap-1.5">
             Feito com <Heart size={10} className="text-brand-primary" /> no norte fluminense

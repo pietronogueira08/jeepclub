@@ -24,6 +24,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  /* Prevent layout shift from scrollbar */
+  overflow-y: scroll;
 }
 
 body {
@@ -33,6 +35,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  /* iOS momentum scrolling */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ─── Scrollbar ───────────────────────────────────────────────────── */
@@ -120,18 +124,24 @@ body {
 /* ─── Masonry Gallery ────────────────────────────────────────────── */
 .masonry-grid {
   columns: 3;
-  column-gap: 12px;
+  column-gap: 10px;
 }
 .masonry-item {
   break-inside: avoid;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 @media (max-width: 1024px) {
   .masonry-grid { columns: 2; }
 }
 @media (max-width: 640px) {
-  .masonry-grid { columns: 1; }
+  .masonry-grid {
+    columns: 2;
+    column-gap: 8px;
+  }
+  .masonry-item {
+    margin-bottom: 8px;
+  }
 }
 
 /* ─── Hamburger Menu ────────────────────────────────────────────── */
@@ -157,15 +167,18 @@ body {
   justify-content: center;
   z-index: 9999;
   backdrop-filter: blur(4px);
+  /* Prevent page scroll behind modal */
+  overscroll-behavior: contain;
+  padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
 }
 
 /* ─── WhatsApp FAB ───────────────────────────────────────────────── */
 @keyframes whatsapp-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(232, 118, 10, 0.7); }
-  70%       { box-shadow: 0 0 0 20px rgba(232, 118, 10, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6); }
+  70%       { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
 }
 .whatsapp-fab {
-  animation: whatsapp-pulse 2s infinite;
+  animation: whatsapp-pulse 2.5s infinite;
 }
 
 /* ─── Stat Counter ───────────────────────────────────────────────── */
@@ -188,9 +201,12 @@ body {
   padding: 12px 16px;
   width: 100%;
   font-family: 'Barlow', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1rem; /* 16px prevents iOS zoom on focus */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   outline: none;
+  /* Prevent iOS styling */
+  -webkit-appearance: none;
+  appearance: none;
 }
 .input-field:focus {
   border-color: var(--color-primary);
@@ -206,5 +222,19 @@ body {
 
 /* ─── Responsive ─────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .clip-diagonal { clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%); }
+  .clip-diagonal { clip-path: none; }
+  .clip-diagonal-reverse { clip-path: none; }
+  .clip-diagonal-both { clip-path: none; }
+}
+
+/* ─── Touch / tap improvements ────────────────────────────────────── */
+@media (hover: none) {
+  /* Remove hover states that look broken on touch */
+  .group:hover .group-hover\:scale-105 { transform: none; }
+}
+
+/* ─── Safe area support (iPhone notch etc.) ────────────────────────── */
+.whatsapp-fab-wrap {
+  bottom: max(1.5rem, calc(env(safe-area-inset-bottom) + 1rem));
+  right: max(1.5rem, calc(env(safe-area-inset-right) + 1rem));
 }
